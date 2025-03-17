@@ -1,0 +1,12 @@
+{% extends 'grades/base.html' %}
+{% block content %}
+<h2>Add Grade</h2>
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-primary">Add Grade</button>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
