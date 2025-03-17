@@ -1,6 +1,19 @@
 # Grades Tracker App
 
-![Grades Tracker Screenshot](screenshot.png) <!-- Add a screenshot if available -->
+## Screenshots
+
+- **Login Page**:
+  ![Login Page](grades/static/screenshots/login.png)
+
+- **Dashboard**:
+  ![Dashboard](grades/static/screenshots/dashboard.png)
+
+- **Add Grade**:
+  ![Add Grade](grades/static/screenshots/add_grade.png)
+
+- **Set Goal**:
+  ![Set Goal](grades/static/screenshots/set_goal.png)
+
 
 The **Grades Tracker App** is a web application built with Django that allows students to track their grades, set goals, and monitor their academic progress. It includes features like user authentication, grade and goal management, and a history log.
 
@@ -98,7 +111,6 @@ Name: Camille Yeyou
 Email: camilleyeyou@gmail.com
 
 GitHub: camilleyeyou
-
 
 
 
