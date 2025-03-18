@@ -126,3 +126,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #DEBUG = False  # Set to False in production
 ALLOWED_HOSTS = ['*']  # Allow all hosts for testing
+LOGIN_REDIRECT_URL = 'dashboard'

@@ -13,8 +13,34 @@
     <div class="col-md-6">
         <h2>Goals</h2>
         <ul class="list-group">
-            {% for goal in goals %}
-            <li class="list-group-item">{{ goal.subject }}: {{ goal.target_grade }} by {{ goal.deadline }}</li>
+            {% for goal in incomplete_goals %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ goal.subject }}: {{ goal.target_grade }} by {{ goal.deadline }}
+                <div>
+                    <form action="{% url 'complete_goal' goal.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-sm" onclick="return confirmComplete()">Complete</button>
+                    </form>
+                    <form action="{% url 'delete_goal' goal.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Delete</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2 class="mt-4">Completed Goals</h2>
+        <ul class="list-group">
+            {% for goal in completed_goals %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ goal.subject }}: {{ goal.target_grade }} by {{ goal.deadline }}
+                <span class="badge bg-success">Completed</span>
+                <form action="{% url 'delete_goal' goal.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Delete</button>
+                </form>
+            </li>
             {% endfor %}
         </ul>
     </div>

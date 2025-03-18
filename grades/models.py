@@ -12,6 +12,7 @@ class Goal(models.Model):
     subject = models.CharField(max_length=100)
     target_grade = models.CharField(max_length=10)
     deadline = models.DateField()
+    completed = models.BooleanField(default=False)
 
 class History(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)

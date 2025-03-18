@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Grade, Goal, History
 from .forms import GradeForm, GoalForm
@@ -12,9 +13,15 @@ from django.contrib.auth import logout
 @login_required
 def dashboard(request):
     grades = Grade.objects.filter(student=request.user)
-    goals = Goal.objects.filter(student=request.user)
+    incomplete_goals = Goal.objects.filter(student=request.user, completed=False)  # Incomplete goals
+    completed_goals = Goal.objects.filter(student=request.user, completed=True)    # Completed goals
     history = History.objects.filter(student=request.user)
-    return render(request, 'grades/dashboard.html', {'grades': grades, 'goals': goals, 'history': history})
+    return render(request, 'grades/dashboard.html', {
+        'grades': grades,
+        'incomplete_goals': incomplete_goals,
+        'completed_goals': completed_goals,
+        'history': history,
+    })
 
 @login_required
 def add_grade(request):
@@ -90,3 +97,16 @@ def set_goal(request):
 def custom_logout(request):
     logout(request)  # Log out the user
     return redirect('login')  # Redirect to the login page
+
+@login_required
+def complete_goal(request, goal_id):
+    goal = get_object_or_404(Goal, id=goal_id, student=request.user)
+    goal.completed = True
+    goal.save()
+    return redirect('dashboard')
+
+@login_required
+def delete_goal(request, goal_id):
+    goal = get_object_or_404(Goal, id=goal_id, student=request.user)
+    goal.delete()
+    return redirect('dashboard')
